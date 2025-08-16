@@ -2,11 +2,8 @@
   "name": "lolweb",
   "private": true,
   "version": "1.0.0",
-  "description": "LolWeb + OpenAI on Vercel Functions",
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
     "openai": "^4.0.0"
-  }
+  },
+  "type": "module"
 }
