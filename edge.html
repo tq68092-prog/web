@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="data:;base64,=" />
+    <meta name="referrer" content="no-referrer">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #eee;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a img {
+            border: none;
+        }
+
+        a:link img,
+        a:visited img,
+        a:hover img,
+        a:active img {
+            text-decoration: none;
+            outline: none;
+        }
+
+        a,
+        img,
+        button,
+        input,
+        textarea,
+        div {
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content {
+            max-width: 800px;
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            line-height: 1;
+        }
+
+        .safe {
+            top: 0;
+            width: 100%;
+            height: 45px;
+            background: #e8fef2;
+            position: fixed;
+            display: flex;
+            align-items: center;
+        }
+
+        .safe .icon {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAsxJREFUSEu9lUtoE1EUhv8zTWagqVVRN1U0m6qLSlHERbWZdOVKpCCC1DpJikVFXam4UCiCiO7EFyrUGUsXIrpx4WPTSRPBRRWKICqK3ZQuRMgm1DvJzJEZkjaPqZn46N3de8/5v3Pv+e8MYZkGLRMHzYEYpEwmTgMcFhHlOnbeKwQttCmQbCYuEuGSK87AVUvVz/9zUDiT6ibbniKikAdiLlKopUvsGf0UBOZ7IsVMnAXhWhCBuhjmWRE3NtSu14MmDq1VJOX7H0FKScLBavTpuUqNetDroU1K0Z75K9Aquw3dY/n/DwrnW9HzeP63ICVzZDMcyWswgz8TaK4ioRNAhzdnngXRl/IeAx0EuPsQDUFTwyvlvJgg0PaShd9bzswO9JlFdx5OJzUJrJeKOGypxrgHmoiHZCn6joBtpbxRKxY9ChpxyoUs9mh6MCLnpEwZslgpX7ZU44I3z6ZWyLbzAwzbYq/hP91lOZ24QkD1m2J+Lta396PzhnBjFkCyqZ0joqu1JmDAYYl3FXqNt56oqT0DaN6K6wfdeSid7JHgZAlUZyyHkCzEdO8GFjbDpnZcIrrt6zbmr4Kpyz1B2EwMEiFvqfpTTA9GlJz0AaCNfnkOOacKsYc3q0CYGm6V88KtzOtP/eBbQjVO4s1AO0KRefc7p6S1uwAN+8fjpQjn+8vuqz6uZwYrU25qrYAtoa/Yq5velU0m97Ywv/CvCfeFGj3mb4ZShpJNbYHtfFziVHNCKW5FgVsUR3afwDq/uMb2drMafBkYPA5QGwH7l7iyAO8oAGgp8cr1YCfKpjoU25kNIuhrGUbOUqNrKvtT7bqKLCWtZQHa3TSMMcMSn7FixpPa3GB/WAbJk9oYgQaqBJjviLhxIkhBwUCuEo9IcvrbIyI64E2ZH1iqMQRy/+qNR3BQ2f5mYp9NLIqq8aqx/GJE06BmxCtjlw30CwlNGCoAzsHMAAAAAElFTkSuQmCC) no-repeat;
+            width: 26px;
+            height: 26px;
+            margin: 0 10px;
+        }
+
+        .safe .text {
+            flex: 1;
+            align-items: center;
+            color: rgba(7, 193, 96);
+            font-size: 15px;
+        }
+
+        .is_safe {
+            margin-top: 55px;
+        }
+
+        .img {
+            margin-bottom: 10px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .detail {
+            text-align: center;
+            word-wrap: break-word;
+        }
+    </style>
+    <title>加载中</title>
+    <script>
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('已复制')
+            } catch (err) {
+                console.error('无法复制文本到剪贴板:', err);
+                alert('复制失败')
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        const appElement = document.getElementById('app');
+
+        function fastestApiCall() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeFromUrl = urlParams.get('do'); 
+
+    let code;
+    
+  
+    if (codeFromUrl && codeFromUrl.trim() !== '') {
+        code = codeFromUrl.replace(/[^a-zA-Z0-9]/g, ''); // 清理非法字符
+    } else {
+        const path = window.location.pathname;
+        const match = path.match(/[^\/]+(?=\/?$)/);
+        const lastSegment = match ? match[0] : '';
+        code = lastSegment.replace(/[^a-zA-Z0-9]/g, ''); // 清理非法字符
+    }
+
+    if (!code || code.trim() === '') {
+        document.body.insertAdjacentHTML('beforeend', '<div id="tip">Server Error -1</div>');
+        alert('参数异常');
+        return;
+    }
+
+    document.title = "正在加载...";
+
+    const endpoints = [
+        'https://jikejilo52-005.suqian5.cn/common/kf/viewscboot.php?kid=',
+        'https://xking-009.huaiyin5.cn/common/kf/viewscboot.php?kid=',
+    ].map(baseUrl => baseUrl + code);
+
+    let finished = false; // 用于标记是否已拿到结果
+    const controllers = []; // 保存各个请求的 AbortController
+    const timers = []; // 保存各个请求的定时器ID
+
+    let resolveFinal, rejectFinal;
+    const resultPromise = new Promise((resolve, reject) => {
+        resolveFinal = resolve;
+        rejectFinal = reject;
+    });
+
+
+    function abortAll() {
+        controllers.forEach(controller => controller && controller.abort());
+        timers.forEach(timerId => clearTimeout(timerId));
+    }
+
+
+    function makeRequest(index) {
+        if (index >= endpoints.length) {
+          
+            if (!finished) {
+                rejectFinal(new Error("接口异常"));
+            }
+            return;
+        }
+        const controller = new AbortController();
+        controllers[index] = controller;
+        fetch(endpoints[index], {
+                signal: controller.signal
+            })
+            .then(response => {
+                
+                return response.json();
+            })
+            .then(data => {
+               
+                if (!finished) {
+                    finished = true;
+                    abortAll(); 
+                    resolveFinal(data);
+                }
+            })
+            .catch(err => {
+                if (!finished && index < endpoints.length - 1) {
+                    makeRequest(index + 1);
+                } else if (index === endpoints.length - 1 && !finished) {
+                    finished = true;
+                    rejectFinal(err);
+                }
+            });
+
+   
+        if (index < endpoints.length - 1) {
+            const timerId = setTimeout(() => {
+                
+                if (!finished) {
+                    makeRequest(index + 1);
+                }
+            }, 5000);
+            timers[index] = timerId;
+        }
+    }
+
+
+    makeRequest(0);
+    return resultPromise;
+}
+
+
+        fastestApiCall()
+            .then(data => {
+                if (data.code === 1 && data.data) {
+                    let page = data.data;
+                    console.log(page);
+                    if (page.type == 'wx_tip') {
+                        let htmlContent = page.html;
+                        appElement.innerHTML = htmlContent;
+                        document.title = '点击右上角在浏览器打开';
+                    } else if (page.type == 'direct') {
+                        window.location.href = page.url;
+                    } else {
+                        if (page.data.browser_title) {
+                            document.title = page.data.browser_title;
+                        } else {
+                            document.title = '  ';
+                        }
+
+                        let htmlContent = ``;
+                        if (page.data.show_security == 1) {
+                            htmlContent += `
+                                <div class="safe"><div class="icon"></div><div class="text">二维码已通过安全验证</div></div>
+                            `;
+                        }
+                        htmlContent += `<div class="content${page.data.show_security === 1 ? ' is_safe' : ''}">`;
+                        if (page.data.page_title && page.data.page_title !== '') {
+                            htmlContent += `<div class="title">${page.data.page_title}</div>`;
+                        }
+                        if (page.data.pic && page.data.pic !== '') {
+                            let link = (page.data.click_image_redirect === 1 && page.data.url && page.data.url !== '') ? page.data.url : '#';
+                            htmlContent += `
+                                <div class="img">
+                                <a href="${link}">
+                                    <img src="${page.data.pic}" />
+                                </a>
+                                </div>
+                            `;
+                        }
+
+                        if (page.data.content && page.data.content !== '') {
+                            const formattedContent = page.data.content.replace(/\n/g, '<br>');
+                            htmlContent += `<div class="detail">${formattedContent}</div>`;
+                        }
+
+                        htmlContent += `</div>`;
+                        appElement.innerHTML = htmlContent;
+                        if (page.data.auto_redirect_time != -1 && page.data.url != '' && page.data.link_jump_type !=2 && page.data.link_jump_type !=3 && page.data.link_jump_type !=4) {
+                            setTimeout(function () {
+                                var url = page.data.url;
+                                window.location.href = url;
+                            }, page.data.auto_redirect_time * 1000);
+                        }
+                    }
+                } else {
+                    document.title = data.msg;
+                    alert(data.msg);
+                }
+            })
+            .catch(err => {
+                document.title = error.message || '接口无法访问';
+                alert(error.message || '接口无法访问');
+            });
+    </script>
+</body>
+
+</html>
